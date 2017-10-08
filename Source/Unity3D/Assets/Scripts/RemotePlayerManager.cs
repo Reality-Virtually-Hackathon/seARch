@@ -189,8 +189,11 @@ void UpdateHeadTransform(NetworkInMessage msg)
 
         Quaternion headRot = customMessages.ReadQuaternion(msg);
 
+        Vector3 headTarget = customMessages.ReadVector3(msg);
+
         RemoteHeadInfo headInfo = GetRemoteHeadInfo(userID);
 
+ 
         Vector3 A = new Vector3();
         Vector3 B = new Vector3();
 
@@ -207,14 +210,11 @@ void UpdateHeadTransform(NetworkInMessage msg)
             if (AppStateManager.Instance.isCommandCenter)
             {
                 //update head 
-                if (!OctreeManager.Instance.GetMarkers(headPos, ref A, ref B))
+                if (!OctreeManager.Instance.GetMarkers(headTarget, ref A, ref B))
                 {
-                    OctreeManager.Instance.Add(headPos);
-                }
-                else
-                {
-                    CustomMessages.Instance.SendMarkerList(A, B, 0x1);
-                    Instantiate(MarkerPrefab, A, Quaternion.identity);
+                    OctreeManager.Instance.Add(headTarget);
+                    CustomMessages.Instance.SendMarkerList(headTarget, headTarget, 0x1);
+                    Instantiate(MarkerPrefab, headTarget, Quaternion.identity);
                 }
               
 

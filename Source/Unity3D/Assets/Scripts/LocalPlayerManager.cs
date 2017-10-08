@@ -35,15 +35,20 @@ public class LocalPlayerManager : Singleton<LocalPlayerManager>
     // Send the user's position each frame.
     void Update()
     {
-        if (ImportExportAnchorManager.Instance.AnchorEstablished)
+        if (!AppStateManager.Instance.isCommandCenter)
         {
-            // Grab the current head transform and broadcast it to all the other users in the session
-            Transform headTransform = Camera.main.transform;
+            if (ImportExportAnchorManager.Instance.AnchorEstablished)
+            {
+                // Grab the current head transform and broadcast it to all the other users in the session
+                Transform headTransform = Camera.main.transform;
 
-            // Transform the head position and rotation into local space
-            Vector3 headPosition = this.transform.InverseTransformPoint(headTransform.position);
-            Quaternion headRotation = Quaternion.Inverse(this.transform.rotation) * headTransform.rotation;
-            CustomMessages.Instance.SendHeadTransform(headPosition, headRotation, 0x1);      
+                // Transform the head position and rotation into local space
+                Vector3 headPosition = this.transform.InverseTransformPoint(headTransform.position);
+                Quaternion headRotation = Quaternion.Inverse(this.transform.rotation) * headTransform.rotation;
+
+                //WSL: changed to add gaze target
+                CustomMessages.Instance.SendHeadTransform(headPosition, headRotation, GazeManager.Instance.HitInfo.point, 0x1);
+            }
         }
     }
 }

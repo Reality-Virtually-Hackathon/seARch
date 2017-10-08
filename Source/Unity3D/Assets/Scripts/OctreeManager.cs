@@ -9,12 +9,14 @@ public class OctreeManager : Singleton<OctreeManager> {
     BoundsOctree<GameObject> boundsTree;
     PointOctree<WatchData> pointTree;
 
+    public GameObject hub;
+
     // Use this for initialization
     void Start () {
         // Initial size (metres), initial centre position, minimum node size (metres), looseness
-       // boundsTree = new BoundsOctree<GameObject>(15, this.transform.position, 1, 1.25f);
+        // boundsTree = new BoundsOctree<GameObject>(15, this.transform.position, 1, 1.25f);
         // Initial size (metres), initial centre position, minimum node size (metres)
-        pointTree = new PointOctree<WatchData>(15, this.transform.position, 1);
+        pointTree = new PointOctree<WatchData>(15, Vector3.zero, 1);// this.transform.position, 1);
     }
 	
 	// Update is called once per frame
@@ -25,7 +27,7 @@ public class OctreeManager : Singleton<OctreeManager> {
     //get markers
     public bool GetMarkers(Vector3 head, ref Vector3 A, ref Vector3 B)
     {
-        WatchData [] markers = pointTree.GetNearby(new Vector3(head.x, head.y, head.z),4); //4 meters around head
+        WatchData [] markers = pointTree.GetNearby(new Vector3(head.x, head.y, head.z),1); //4 meters around head
         if (markers.Length > 0)
         {
             A = markers[0].position;

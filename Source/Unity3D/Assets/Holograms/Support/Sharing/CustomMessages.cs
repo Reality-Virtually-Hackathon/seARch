@@ -96,7 +96,8 @@ public class CustomMessages : Singleton<CustomMessages>
         return msg;
     }
 
-    public void SendHeadTransform(Vector3 position, Quaternion rotation, byte HasAnchor)
+    //WSL: changed to send head gaze target
+    public void SendHeadTransform(Vector3 position, Quaternion rotation, Vector3 target, byte HasAnchor)
     {
         // If we are connected to a session, broadcast our head info
         if (this.serverConnection != null && this.serverConnection.IsConnected())
@@ -105,6 +106,7 @@ public class CustomMessages : Singleton<CustomMessages>
             NetworkOutMessage msg = CreateMessage((byte)TestMessageID.HeadTransform);
 
             AppendTransform(msg, position, rotation);
+            AppendVector3(msg,target);
 
             msg.Write(HasAnchor);
 
