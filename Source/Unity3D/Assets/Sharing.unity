@@ -1472,7 +1472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f440a97ca89fa4498e96c0964a5506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCommandCenter: 1
+  isCommandCenter: 0
 --- !u!114 &1541892459
 MonoBehaviour:
   m_ObjectHideFlags: 0
