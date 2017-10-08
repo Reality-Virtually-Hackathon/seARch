@@ -129,7 +129,7 @@ public class HologramPlacement : Singleton<HologramPlacement>
         // Wait till users pick an avatar to enable renderers.
         if (disabledRenderers.Count > 0)
         {
-            if (!PlayerAvatarStore.Instance.PickerActive &&
+            if (//!PlayerAvatarStore.Instance.PickerActive &&  //WSLNOW
             ImportExportAnchorManager.Instance.AnchorEstablished)
             {
                 // After which we want to start rendering.

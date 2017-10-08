@@ -46,7 +46,7 @@ public class AppStateManager : Singleton<AppStateManager>
         SpatialMappingManager.Instance.gameObject.SetActive(false);
 
         // On device we start by showing the avatar picker.
-        PlayerAvatarStore.Instance.SpawnAvatarPicker();
+       // PlayerAvatarStore.Instance.SpawnAvatarPicker();  //WSLNOW
     }
 
     public void ResetStage()
@@ -71,7 +71,7 @@ public class AppStateManager : Singleton<AppStateManager>
         {
             case AppState.PickingAvatar:
                 // Avatar picking is done when the avatar picker has been dismissed.
-                if (PlayerAvatarStore.Instance.PickerActive == false)
+                //if (PlayerAvatarStore.Instance.PickerActive == false)  //WSLNOW
                 {
                     CurrentAppState = AppState.WaitingForAnchor;
                 }

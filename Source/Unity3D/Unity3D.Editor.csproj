@@ -152,6 +152,7 @@
     <None Include="Assets\HoloToolkit-Sharing-240\Shaders\VertexLitConfigurable.shader" />
     <None Include="Assets\HoloToolkit-Sharing-240\Shaders\VertexLitConfigurableTransparent.shader" />
     <None Include="Assets\HoloToolkit-Sharing-240\Shaders\Wireframe.shader" />
+    <None Include="Assets\Models\flag\archibase.net.txt" />
     <None Include="Assets\Shaders\BlobWire.shader" />
     <None Include="Assets\Shaders\BlobWireInside.shader" />
     <None Include="Assets\Shaders\ExplodingSRShader.shader" />

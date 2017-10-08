@@ -11,6 +11,7 @@ using UnityEngine;
 public class RemotePlayerManager : Singleton<RemotePlayerManager>
 {
     public GameObject MarkerPrefab;
+    public GameObject PlayerPrefab;
 
     public class RemoteHeadInfo
     {
@@ -94,13 +95,13 @@ public class RemotePlayerManager : Singleton<RemotePlayerManager>
         headInfo.HitCount++;
 
         AudioSource remoteHeadAudio = headInfo.HeadObject.GetComponentInChildren<AudioSource>();
-        PlayerAvatarParameters playerParams = PlayerAvatarStore.Instance.PlayerAvatars[headInfo.PlayerAvatarIndex].GetComponent<PlayerAvatarParameters>();
+        PlayerAvatarParameters playerParams = PlayerPrefab.GetComponent<PlayerAvatarParameters>();  //WSLNOW PlayerAvatarStore.Instance.PlayerAvatars[headInfo.PlayerAvatarIndex].GetComponent<PlayerAvatarParameters>();
         if (hitUserId == customMessages.localUserID)
         {
             // ack they hit ME!!! 
             // Play the 'they hit me' sound.
             AudioSource localAudioSource = Camera.main.GetComponent<AudioSource>();
-            PlayerAvatarParameters localPlayerParams = PlayerAvatarStore.Instance.PlayerAvatars[LocalPlayerManager.Instance.AvatarIndex].GetComponent<PlayerAvatarParameters>();
+            PlayerAvatarParameters localPlayerParams = PlayerPrefab.GetComponent<PlayerAvatarParameters>();//WLSNOW PlayerAvatarStore.Instance.PlayerAvatars[LocalPlayerManager.Instance.AvatarIndex].GetComponent<PlayerAvatarParameters>();
             localAudioSource.clip = localPlayerParams.SomeoneHitPlayerClip;
             localAudioSource.Play();
         }
@@ -128,7 +129,7 @@ public class RemotePlayerManager : Singleton<RemotePlayerManager>
             Destroy(headInfo.HeadObject);
         }
 
-        headInfo.HeadObject = Instantiate(PlayerAvatarStore.Instance.PlayerAvatars[headInfo.PlayerAvatarIndex]);
+        headInfo.HeadObject = Instantiate(PlayerPrefab); // WSLNOW PlayerAvatarStore.Instance.PlayerAvatars[headInfo.PlayerAvatarIndex]);
         headInfo.headObjectPositionOffset = headInfo.HeadObject.transform.localPosition;
         headInfo.HeadObject.transform.parent = this.transform;
         headInfo.HeadObject.GetComponent<PlayerAvatarParameters>();

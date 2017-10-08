@@ -17,7 +17,7 @@ public class LocalPlayerManager : Singleton<LocalPlayerManager>
     /// <param name="AvatarIndex"></param>
     public void SetUserAvatar(int AvatarIndex)
     {
-        this.AvatarIndex = AvatarIndex;
+        this.AvatarIndex = 0; // AvatarIndex; //WSLNOW
 
         // Let everyone else know who we are.
         SendUserAvatar();
