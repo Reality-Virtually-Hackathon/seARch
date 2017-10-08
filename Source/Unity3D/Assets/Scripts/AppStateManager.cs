@@ -46,7 +46,7 @@ public class AppStateManager : Singleton<AppStateManager>
         SpatialMappingManager.Instance.gameObject.SetActive(false);
 
         // On device we start by showing the avatar picker.
-       // PlayerAvatarStore.Instance.SpawnAvatarPicker();  //WSLNOW
+        PlayerAvatarStore.Instance.SpawnAvatarPicker();  //WSLNOW
     }
 
     public void ResetStage()

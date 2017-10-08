@@ -21,8 +21,9 @@ public class OctreeManager : Singleton<OctreeManager> {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+ 
+
+    }
 
     //get markers
     public bool GetMarkers(Vector3 head, ref Vector3 A, ref Vector3 B)

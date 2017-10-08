@@ -35,7 +35,7 @@ public class PlayerAvatarStore : Singleton<PlayerAvatarStore>
     public float PickerDistanceFromUser = 2.0f;
 
     // Distance between avatars.
-    private const float avatarPositionOffset = 0.3f;
+    private const float avatarPositionOffset = 0.5f;
 
     // Time when audioSource.Play() was called.
     private float audioStartTime = 0.0f;
@@ -101,6 +101,13 @@ public class PlayerAvatarStore : Singleton<PlayerAvatarStore>
     // Called every frame.
     void Update()
     {
+        //WSL added to spawn menu when the hand is visible
+        if(HandsTrackingManager.Instance.HandDetected)
+        {
+            SpawnAvatarPicker();
+        }
+
+
         if (PickerActive)
         {
             // Our sound does not have built-in looping, so we'll control playback frequency here.

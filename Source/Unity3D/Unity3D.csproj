@@ -198,6 +198,7 @@
     <Compile Include="Assets\Scripts\AppStateManager.cs" />
     <Compile Include="Assets\Scripts\AvatarSelector.cs" />
     <Compile Include="Assets\Scripts\ExplodeTarget.cs" />
+    <Compile Include="Assets\Scripts\HandsTrackingManager.cs" />
     <Compile Include="Assets\Scripts\HologramPlacement.cs" />
     <Compile Include="Assets\Scripts\ImportExportAnchorManager.cs" />
     <Compile Include="Assets\Scripts\LocalPlayerManager.cs" />

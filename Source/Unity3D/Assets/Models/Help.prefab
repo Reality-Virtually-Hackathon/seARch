@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 64540119055484004}
   - component: {fileID: 23974150804322080}
   m_Layer: 0
-  m_Name: Warning 1
+  m_Name: Help
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,7 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0758105b340f2c54790e3b4f99f75d40, type: 2}
+  - {fileID: 2100000, guid: e2594a91865396846a6f8a3d1b90915c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

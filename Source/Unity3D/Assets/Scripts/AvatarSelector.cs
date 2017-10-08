@@ -17,8 +17,8 @@ public class AvatarSelector : MonoBehaviour
     /// </summary>
     void OnSelect()
     {
+        PlayerAvatarStore.Instance.DismissAvatarPicker();
 
-   
     }
 
     void Start()
@@ -33,8 +33,8 @@ public class AvatarSelector : MonoBehaviour
         // Lock rotation along the Y axis.
         billboard.PivotAxis = PivotAxis.Y;
 
-      //  PlayerAvatarStore.Instance.DismissAvatarPicker();
-       // LocalPlayerManager.Instance.SetUserAvatar(AvatarIndex);
+      // PlayerAvatarStore.Instance.DismissAvatarPicker();
+      // LocalPlayerManager.Instance.SetUserAvatar(AvatarIndex);
 
 
     }
