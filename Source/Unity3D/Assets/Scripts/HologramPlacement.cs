@@ -38,7 +38,7 @@ public class HologramPlacement : Singleton<HologramPlacement>
 
         // Setup a keyword recognizer to enable resetting the target location.
         List<string> keywords = new List<string>();
-        keywords.Add("Reset Target");
+        keywords.Add("Clear Scene");
         keywordRecognizer = new KeywordRecognizer(keywords.ToArray());
         keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
         keywordRecognizer.Start();
@@ -140,7 +140,7 @@ public class HologramPlacement : Singleton<HologramPlacement>
                 {
                     // This triggers the animation sequence for the model and
                     // puts the cool materials on the model.
-                    GetComponent<EnergyHubBase>().SendMessage("OnSelect");
+                   // GetComponent<EnergyHubBase>().SendMessage("OnSelect");
                 }
             }
         }
@@ -195,16 +195,24 @@ public class HologramPlacement : Singleton<HologramPlacement>
                 retval = Camera.main.transform.position + Camera.main.transform.forward * 2;
             }
         }
+
+        //WLS CHANGED
+        // Note that we have a transform.
+         GotTransform = true;
+
+        // And send it to our friends.
+        CustomMessages.Instance.SendStageTransform(transform.localPosition, transform.localRotation);
+
         return retval;
     }
 
     public void OnSelect()
     {
         // Note that we have a transform.
-        GotTransform = true;
+       // GotTransform = true;
 
         // And send it to our friends.
-        CustomMessages.Instance.SendStageTransform(transform.localPosition, transform.localRotation);
+        //CustomMessages.Instance.SendStageTransform(transform.localPosition, transform.localRotation);
     }
 
     /// <summary>
@@ -223,7 +231,7 @@ public class HologramPlacement : Singleton<HologramPlacement>
         // swap its materials.
         if (disabledRenderers.Count == 0 && GotTransform == false)
         {
-            GetComponent<EnergyHubBase>().SendMessage("OnSelect");
+           // GetComponent<EnergyHubBase>().SendMessage("OnSelect");
         }
 
         GotTransform = true;

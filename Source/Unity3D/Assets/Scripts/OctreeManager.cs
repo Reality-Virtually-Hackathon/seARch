@@ -9,8 +9,6 @@ public class OctreeManager : Singleton<OctreeManager> {
     BoundsOctree<GameObject> boundsTree;
     PointOctree<WatchData> pointTree;
 
-    public GameObject hub;
-
     // Use this for initialization
     void Start () {
         // Initial size (metres), initial centre position, minimum node size (metres), looseness
