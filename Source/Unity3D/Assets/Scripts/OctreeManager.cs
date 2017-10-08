@@ -16,7 +16,7 @@ public class OctreeManager : Singleton<OctreeManager> {
         // Initial size (metres), initial centre position, minimum node size (metres), looseness
         // boundsTree = new BoundsOctree<GameObject>(15, this.transform.position, 1, 1.25f);
         // Initial size (metres), initial centre position, minimum node size (metres)
-        pointTree = new PointOctree<WatchData>(15, Vector3.zero, 1);// this.transform.position, 1);
+        pointTree = new PointOctree<WatchData>(50, Vector3.zero, 0.5f);// this.transform.position, 1);
     }
 	
 	// Update is called once per frame

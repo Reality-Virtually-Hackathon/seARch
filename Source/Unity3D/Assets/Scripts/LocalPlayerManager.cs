@@ -46,8 +46,8 @@ public class LocalPlayerManager : Singleton<LocalPlayerManager>
                 Vector3 headPosition = this.transform.InverseTransformPoint(headTransform.position);
                 Quaternion headRotation = Quaternion.Inverse(this.transform.rotation) * headTransform.rotation;
 
-                //WSL: changed to add gaze target
-                CustomMessages.Instance.SendHeadTransform(headPosition, headRotation, GazeManager.Instance.HitInfo.point, 0x1);
+                //WSL: changed to add gaze target, normal
+                CustomMessages.Instance.SendHeadTransform(headPosition, headRotation, GazeManager.Instance.HitInfo.point, GazeManager.Instance.HitInfo.normal, 0x1);
             }
         }
     }

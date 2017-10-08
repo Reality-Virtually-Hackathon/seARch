@@ -9,6 +9,9 @@ public class AppStateManager : Singleton<AppStateManager>
     /// <summary>
     /// Enum to track progress through the experience.
     /// </summary>
+    /// 
+    public bool isCommandCenter;
+
     public enum AppState
     {
         Starting = 0,
@@ -18,16 +21,13 @@ public class AppStateManager : Singleton<AppStateManager>
         Ready
     }
 
-    public bool isCommandCenter;  //change this to compile a client that will show the overview
-
-
     // The object to call to make a projectile.
     GameObject shootHandler = null;
 
     /// <summary>
     /// Tracks the current state in the experience.
     /// </summary>
-    public AppState CurrentAppState; //{ get; set; }
+    public AppState CurrentAppState { get; set; }
 
     void Start()
     {
@@ -45,11 +45,8 @@ public class AppStateManager : Singleton<AppStateManager>
         SpatialMappingManager.Instance.StopObserver();
         SpatialMappingManager.Instance.gameObject.SetActive(false);
 
-        if (!isCommandCenter)
-        {
-            // On device we start by showing the avatar picker.
-            PlayerAvatarStore.Instance.SpawnAvatarPicker();
-        }
+        // On device we start by showing the avatar picker.
+        PlayerAvatarStore.Instance.SpawnAvatarPicker();
     }
 
     public void ResetStage()
@@ -74,14 +71,10 @@ public class AppStateManager : Singleton<AppStateManager>
         {
             case AppState.PickingAvatar:
                 // Avatar picking is done when the avatar picker has been dismissed.
-                if (!isCommandCenter)
+                if (PlayerAvatarStore.Instance.PickerActive == false)
                 {
-                    if (PlayerAvatarStore.Instance.PickerActive == false)
-                    {
-                        CurrentAppState = AppState.WaitingForAnchor;
-                    }
+                    CurrentAppState = AppState.WaitingForAnchor;
                 }
-                else CurrentAppState = AppState.WaitingForAnchor;
                 break;
             case AppState.WaitingForAnchor:
                 // Once the anchor is established we need to run spatial mapping for a 

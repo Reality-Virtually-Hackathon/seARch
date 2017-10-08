@@ -44,6 +44,8 @@ namespace Academy.HoloToolkit.Unity
             gazeDirection = Camera.main.transform.forward;
 
             UpdateRaycast();
+
+
         }
 
         /// <summary>
@@ -51,23 +53,48 @@ namespace Academy.HoloToolkit.Unity
         /// </summary>
         private void UpdateRaycast()
         {
-            // Get the raycast hit information from Unity's physics system.
-            RaycastHit hitInfo;
-            Hit = Physics.Raycast(gazeOrigin,
-                           gazeDirection,
-                           out hitInfo,
-                           MaxGazeDistance,
-                           RaycastLayerMask);
+            Vector3[] samples = new Vector3[4];
 
-            // Update the HitInfo property so other classes can use this hit information.
-            HitInfo = hitInfo;
-            
-            if (Hit)
+            samples[0] = gazeDirection;
+            samples[1] = gazeDirection + new Vector3(0, 0.01f, 0);
+            samples[2] = gazeDirection + new Vector3(0.01f, 0, 0);
+            samples[3] = gazeDirection + new Vector3(0.01f, 0.01f, 0);
+ 
+            int count = 0;
+            Position = Vector3.zero;
+            Normal = Vector3.zero;
+            float distance = 0;
+
+            for (int i = 0; i < samples.Length; i++)
             {
-                // If the raycast hits a hologram, set the position and normal to match the intersection point.
-                Position = hitInfo.point;
-                Normal = hitInfo.normal;
-                lastHitDistance = hitInfo.distance;
+
+                // Get the raycast hit information from Unity's physics system.
+                RaycastHit hitInfo;
+                Hit = Physics.Raycast(gazeOrigin,
+                               samples[i],
+                               out hitInfo,
+                               MaxGazeDistance,
+                               RaycastLayerMask);
+
+                // Update the HitInfo property so other classes can use this hit information.
+                HitInfo = hitInfo;
+
+                if (Hit)
+                {
+                    // If the raycast hits a hologram, set the position and normal to match the intersection point.
+                    Position += hitInfo.point;
+                    Normal += hitInfo.normal;
+                    distance += hitInfo.distance;
+                    count++;
+                }
+            }
+
+            if (count > 0)
+            {
+                Position /= count;
+                Normal /= count;
+                Normal.Normalize();
+                lastHitDistance = distance/count;
             }
             else
             {
@@ -77,5 +104,6 @@ namespace Academy.HoloToolkit.Unity
                 Normal = gazeDirection;
             }
         }
+
     }
 }

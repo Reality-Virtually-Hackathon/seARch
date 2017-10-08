@@ -166,7 +166,7 @@ public class HologramPlacement : Singleton<HologramPlacement>
         }
 
         // If we have more than one player ...
-      /*  if (playerCount > 1)
+        if (playerCount > 1)
         {
             // Put the transform in between the players.
             retval = cumulatedPosition / playerCount;
@@ -179,7 +179,7 @@ public class HologramPlacement : Singleton<HologramPlacement>
             }
         }
         // If we are the only player, have the model act as the 'cursor' ...
-        else */
+        else
         {
             // We prefer to put the model on a real world surface.
             RaycastHit hitInfo;

@@ -172,7 +172,10 @@ public class RemotePlayerManager : Singleton<RemotePlayerManager>
 
         Debug.Log(A);
         Debug.Log(B);
-        Instantiate(MarkerPrefab, A, Quaternion.identity);
+        GameObject a = Instantiate(MarkerPrefab, A, Quaternion.identity);
+
+        // Orient the cursor to match the surface being gazed at.
+        a.transform.up = GazeManager.Instance.Normal;
 
     }
 
@@ -190,6 +193,7 @@ void UpdateHeadTransform(NetworkInMessage msg)
         Quaternion headRot = customMessages.ReadQuaternion(msg);
 
         Vector3 headTarget = customMessages.ReadVector3(msg);
+        Vector3 targetNormal = customMessages.ReadVector3(msg);
 
         RemoteHeadInfo headInfo = GetRemoteHeadInfo(userID);
 
@@ -213,8 +217,14 @@ void UpdateHeadTransform(NetworkInMessage msg)
                 if (!OctreeManager.Instance.GetMarkers(headTarget, ref A, ref B))
                 {
                     OctreeManager.Instance.Add(headTarget);
-                    CustomMessages.Instance.SendMarkerList(headTarget, headTarget, 0x1);
-                    Instantiate(MarkerPrefab, headTarget, Quaternion.identity);
+
+
+                    CustomMessages.Instance.SendMarkerList(headTarget, targetNormal, 0x1);
+                    GameObject a = Instantiate(MarkerPrefab, headTarget, Quaternion.identity);
+
+                    // Orient the cursor to match the surface being gazed at.
+                    a.transform.up = GazeManager.Instance.Normal;
+
                 }
               
 
